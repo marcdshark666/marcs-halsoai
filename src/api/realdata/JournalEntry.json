@@ -1,0 +1,154 @@
+[
+  {
+    "date": "2018-09-27",
+    "title": "Läkarkommentar till privata blodprover",
+    "content": "Förhöjt blodsocker och långtidssocker – rekommenderas diskutera detta med diabetessköterskan.\n\nLätt förhöjt CRP och sköldkörtelhormon (T4).\n\nLågt D-vitamin och en ofördelaktig kolesterolfördelning (ApoB/ApoA1-kvot 0,8).\n\nKalcium och B12 låg också lätt förhöjt, vilket bedömdes som sannolika normalvarianter.",
+    "type": "provsvar",
+    "clinic": "Werlabs",
+    "doctor": "Lars André"
+  },
+  {
+    "date": "2018-12-27",
+    "title": "P-T4 fritt utanför referensintervallet",
+    "content": "Fritt T4 stjärnmarkerat i provsvaret, utanför laboratoriets referensintervall 7,6–16 pmol/L. Något numeriskt värde finns inte i underlaget.\n\nOBS: laboratorierna använder olika referensintervall för fritt T4. Senare kontroller (2019, 2024, 2026) har legat 18–20 pmol/L och bedömts som normala mot ett intervall på 12–22.",
+    "type": "provsvar",
+    "clinic": "Ekerö Vårdcentral",
+    "doctor": ""
+  },
+  {
+    "date": "2019-11-11",
+    "title": "Svettest – cystisk fibros utesluten",
+    "content": "Svettklorid 9 mmol/L. Normalt värde (under 30 mmol/L talar emot cystisk fibros; 30–59 är intermediärt och 60 eller mer diagnostiskt).\n\nUtredningen gjordes på grund av bronkiektasier och recidiverande luftvägsinfektioner.",
+    "type": "provsvar",
+    "clinic": "Cystisk fibros-mottagningen",
+    "doctor": ""
+  },
+  {
+    "date": "2025-01-07",
+    "title": "Bronkoskopi vid tilltagande lungförändringar",
+    "content": "Bronkoskopi genomförd på grund av tilltagande lungförändringar.\n\nFYND: Gulaktiga slemklumpar på båda sidor.\n\nODLING: Haemophilus influenzae.\n\nBEHANDLING: Doxyferm i 14 dagar.",
+    "type": "undersökning",
+    "clinic": "Lung- och allergimottagningen",
+    "doctor": ""
+  },
+  {
+    "date": "2025-02-07",
+    "title": "Leverfläckar bedömda, anamnes kring bihålor och luftvägar",
+    "content": "Två leverfläckar undersöktes (höger axel och vänster rygg) och bilder skickades via Dermicus.\n\nANAMNES: Bihålebesvär sedan 16-årsåldern. Daglig nästäppa och slem. Uttalad snarkning. Upprepade luftvägsinfektioner.\n\nÄven noterat: knölar på halsen och subklavikulärt.",
+    "type": "besök",
+    "clinic": "Sundbybergs Vårdcentral",
+    "doctor": "Ada Wozniak"
+  },
+  {
+    "date": "2025-02-10",
+    "title": "Svar om leverfläckar samt byte till Dexcom G7",
+    "content": "Meddelande via 1177 angående leverfläckarna: ingen åtgärd behövdes.\n\nSamma dag efterfrågades recept på Dexcom G6 hos diabetessköterskan Gudrun Andersson, som i stället beställde den nyare Dexcom G7.",
+    "type": "recept",
+    "clinic": "Centrum för diabetes / Sundbybergs Vårdcentral",
+    "doctor": "Gudrun Andersson (diabetessköterska)"
+  },
+  {
+    "date": "2025-02-13",
+    "title": "Återbesök lungmottagning – spirometri och medicinbyte",
+    "content": "Dagliga slembesvär trots Anoro och Atrovent.\n\nSPIROMETRI: Lätt obstruktivitet med FEV1/FVC 0,72. I övrigt normala lungvolymer.\n\nÅTGÄRD: Atrovent byttes mot Oxis. Nya odlingar beställdes.",
+    "type": "besök",
+    "clinic": "Lung- och allergimottagningen",
+    "doctor": "Michael Runold"
+  },
+  {
+    "date": "2025-02-17",
+    "title": "Telefonuppföljning – stafylokocker i sputum",
+    "content": "SPUTUMODLING: Växt av Staphylococcus aureus.\n\nLUNGRÖNTGEN: Partiell förbättring av lungförändringarna.\n\nÅTGÄRD: Trim-Sulfa i två veckor. Ny remiss till öron-näsa-hals.",
+    "type": "telefon",
+    "clinic": "Lung- och allergimottagningen",
+    "doctor": "Michael Runold"
+  },
+  {
+    "date": "2025-02-27",
+    "title": "Paronyki höger stortå",
+    "content": "Höger stortå svullen och smärtande utan synligt var.\n\nBEDÖMNING: Paronyki (nagelbandsinflammation).\n\nBEHANDLING: Terracortril med polymyxin B samt omslag med Alsolsprit.",
+    "type": "besök",
+    "clinic": "Sundbybergs Vårdcentral",
+    "doctor": "Ada Wozniak"
+  },
+  {
+    "date": "2025-03-11",
+    "title": "Telefonuppföljning efter Trim-Sulfa",
+    "content": "Antibiotikakuren avslutad. Luftvägarna bättre, men viss daglig slemproduktion kvarstår.\n\nPLAN: Återbesök om ett halvår.",
+    "type": "telefon",
+    "clinic": "Lung- och allergimottagningen",
+    "doctor": "Michael Runold"
+  },
+  {
+    "date": "2025-03-24",
+    "title": "ÖNH-bedömning – inga polyper, rakt septum",
+    "content": "Bedömning av näs- och bihålebesvär.\n\nSTATUS: Rakt nässeptum, inga polyper.\n\nBEDÖMNING: Ingen kronisk sinuit som orsakar lungbesvären.\n\nBEHANDLING: Nässprayen Ryaltris.",
+    "type": "besök",
+    "clinic": "Sergelkliniken ÖNH",
+    "doctor": "Balcarras Crafoord"
+  },
+  {
+    "date": "2025-04-01",
+    "title": "Paronyki kvarstår – peroral antibiotika",
+    "content": "Nagelbandsinflammationen på tån hade inte blivit bättre av lokalbehandling.\n\nBEHANDLING: Heracillin i tablettform i 10 dagar.",
+    "type": "besök",
+    "clinic": "Sundbybergs Vårdcentral",
+    "doctor": "Ada Wozniak"
+  },
+  {
+    "date": "2025-04-14",
+    "title": "Egen anteckning: ny knöl på halsen",
+    "content": "Upptäckt en liten knöl på cirka 0,8 cm på höger sida av halsen, ungefär en och en halv centimeter nedanför en finne.",
+    "type": "egen anteckning",
+    "clinic": "",
+    "doctor": ""
+  },
+  {
+    "date": "2025-04-17",
+    "title": "Kronisk rinosinuit – behandling ändrad, DT bihålor planerad",
+    "content": "DIAGNOS: Kronisk rinosinuit.\n\nBEDÖMNING: Osannolikt att näsbesvären orsakar lungproblemen.\n\nBEHANDLING: Sköljning med Budesonidlösning morgon och kväll.\n\nPLAN: Ny skiktröntgen (DT) av bihålorna.",
+    "type": "besök",
+    "clinic": "Karolinska ÖNH",
+    "doctor": "Karin Toll"
+  },
+  {
+    "date": "2026-04-12",
+    "title": "Egen anteckning: pumpinställning, kolhydratkvot höjd",
+    "content": "Infusionssetet satt på vänster sida av buken.\n\nHöjde kolhydratkvoten från 1:12 till 1:13 eftersom jag gått lågt (runt 3,1) kvällen innan trots intag av 53 gram kolhydrater.\n\nBasaldos 1 E/h. Blodsocker låg bra (7,8–10) under dagen.",
+    "type": "egen anteckning",
+    "clinic": "",
+    "doctor": ""
+  },
+  {
+    "date": "2026-04-18",
+    "title": "Egen anteckning: profil höger buk, korrektionsdos ändrad",
+    "content": "Kl. 17.22. Uppdaterade profilen till höger sida av buken.\n\nBasal 1 E/h. Korrektionsdos ändrad till 1 E per 4,4. Kolhydratkvot 1:13. Target 5,0.\n\nVid padelspel blev jag låg av att bara sänka basalen (troligen på grund av överdosering innan). Det funkade bra att stänga av pumpen helt och äta en clementin inför en cykeltur.",
+    "type": "egen anteckning",
+    "clinic": "",
+    "doctor": ""
+  },
+  {
+    "date": "2026-04-19",
+    "title": "Egen anteckning: låg efter McDonald's",
+    "content": "Tog insulin för 57 kolhydrater på McDonald's men gick lågt (ner till 4). Tror att kolhydratkvoten är för stark.",
+    "type": "egen anteckning",
+    "clinic": "",
+    "doctor": ""
+  },
+  {
+    "date": "2026-04-19",
+    "title": "CGM-sammanfattning 6–19 april 2026",
+    "content": "Tid i målområde (3,9–10 mmol/L): 74 %\nHögt (10,1–13,9): 14 %\nMycket högt (>13,9): 7 %\nLågt (3,0–3,8): 4 %\nMycket lågt (<3,0): 1 %\n\nGenomsnittligt glukosvärde: 8,0 mmol/L (median 7,2)\nGMI (uppskattat HbA1c): 6,8 % motsvarande 50,3 mmol/mol\nStandardavvikelse: 3,1 mmol/L",
+    "type": "provsvar",
+    "clinic": "Dexcom G7",
+    "doctor": ""
+  },
+  {
+    "date": "2026-04-20",
+    "title": "Egen anteckning: kolhydratkvot tillbaka till 1:12",
+    "content": "Ändrade kolhydratkvoten till 1:12 (höger buk). Efter insulin för två Gorbys låg jag fortfarande högt (cirka 15) 40 minuter senare.\n\nTestade också flingor och mjölk och blev hög, varpå jag skruvade upp enheterna till 14,3.",
+    "type": "egen anteckning",
+    "clinic": "",
+    "doctor": ""
+  }
+]

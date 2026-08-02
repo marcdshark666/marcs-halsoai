@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 215 25% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 12%;
+    --primary: 215 70% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 15% 95%;
+    --secondary-foreground: 215 25% 20%;
+    --muted: 210 12% 93%;
+    --muted-foreground: 215 10% 50%;
+    --accent: 160 60% 42%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 15% 90%;
+    --input: 214 15% 90%;
+    --ring: 215 70% 45%;
+    --chart-1: 215 70% 45%;
+    --chart-2: 160 60% 42%;
+    --chart-3: 35 92% 50%;
+    --chart-4: 0 72% 51%;
+    --chart-5: 270 60% 55%;
+    --radius: 0.75rem;
+    --font-heading: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    --orchid: 275 44% 55%;
+    --orchid-soft: 320 52% 88%;
+    --orchid-deep: 275 40% 40%;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 240 10% 5%;
+    --foreground: 0 0% 95%;
+    --card: 240 6% 11%;
+    --card-foreground: 0 0% 95%;
+    --popover: 240 6% 11%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 211 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 5% 16%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 240 5% 16%;
+    --muted-foreground: 240 5% 60%;
+    --accent: 265 50% 56%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 6% 18%;
+    --input: 240 6% 18%;
+    --ring: 211 100% 50%;
+    --chart-1: 211 100% 50%;
+    --chart-2: 174 58% 40%;
+    --chart-3: 22 100% 60%;
+    --chart-4: 265 50% 56%;
+    --chart-5: 340 75% 55%;
+    --orchid: 265 50% 56%;
+    --orchid-soft: 300 40% 25%;
+    --orchid-deep: 265 40% 35%;
+    --sidebar-background: 240 10% 5%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 211 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 211 100% 50%;
+  }
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+}

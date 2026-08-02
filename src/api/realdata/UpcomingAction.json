@@ -1,0 +1,192 @@
+[
+  {
+    "title": "Viktkurva – väg dig en gång i veckan, samma våg och samma tid",
+    "description": "VARFÖR: Viktnedgången 89 → 84–86 kg på fem månader är den mätbara varningssignalen i hela bilden, och glykemisk kontroll förklarar den inte (HbA1c 40–49). Hastigheten är lika viktig som absolutvärdet: fortsatt nedgång under utredningen skärper indikationen för bilddiagnostik, en stabiliserad kurva är ett lugnande besked i sig.\n\nSÅ HÄR: Samma våg, samma veckodag, före frukost. Notera ungefärligt kaloriintag – utan det går malabsorption inte att skilja från otillräckligt intag.",
+    "due_date": "2026-07-28",
+    "priority": "hög",
+    "type": "egenvård",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["weightloss_occult_cancer", "bronkiektasi_ers_2017"]
+  },
+  {
+    "title": "1. Sputumodling för mykobakterier – 3 morgonprov",
+    "description": "VARFÖR: Bronkiektasier + tilltagande lungförändringar + ofrivillig viktnedgång är den klassiska bilden för icke-tuberkulösa mykobakterier, framför allt Mycobacterium avium-komplexet. I hela materialet finns bara vanliga bakterieodlingar (H. influenzae jan 2025, S. aureus feb 2025) – vanlig odling hittar inte mykobakterier, provet måste beställas särskilt.\n\nVAD SVARET ÄNDRAR: Positivt fynd förklarar viktnedgången och byter behandling helt – kombinationsterapi i minst 12 månader. Negativt svar krävs innan makrolidprofylax får sättas in: azitromycin i monoterapi vid odiagnostiserad NTM ger makrolidresistens och förstör den viktigaste behandlingskomponenten.\n\nDÄRFÖR LIGGER DEN FÖRST.",
+    "due_date": "2026-08-05",
+    "priority": "akut",
+    "type": "odling",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["ntm_ats_2020", "bronkiektasi_bts_2019", "makrolid_bat_2013"]
+  },
+  {
+    "title": "2. HRCT thorax",
+    "description": "VARFÖR: Bronkiektasiernas utbredning är aldrig kvantifierad. Det som finns är bronkoskopi januari 2025 och slätröntgen februari 2025 med \"partiell förbättring\" – och slätröntgen är otillräcklig för att bedöma bronkiektasier.\n\nVAD SVARET ÄNDRAR: Ger utgångsvärdet all framtida uppföljning mäts mot, visar mucus plugging och de trädtoppsförändringar som talar för mykobakterier, och avgör hur intensiv sekretmobilisering och profylax som behövs.",
+    "due_date": "2026-08-12",
+    "priority": "akut",
+    "type": "bilddiagnostik",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["bronkiektasi_ers_2017", "bronkiektasi_bts_2019", "ntm_ats_2020"]
+  },
+  {
+    "title": "3. Nasalt kväveoxid (nNO) – screening för primär ciliär dyskinesi",
+    "description": "VARFÖR: Den viktigaste diagnos som aldrig har övervägts. PCD ger exakt din kombination: bronkiektasier, kronisk rinosinuit sedan 16-årsåldern, daglig nästäppa, uttalad snarkning och recidiverande luftvägsinfektioner. De två vanligaste alternativen är redan uteslutna hos dig – svettklorid 9 utesluter cystisk fibros och normala immunglobuliner utesluter CVID.\n\nUNDERSÖKNINGEN: Utandningsprov i näsan, några minuter, icke-invasivt. Kraftigt sänkt vid PCD.\n\nVAD SVARET ÄNDRAR: Lågt nNO leder till videomikroskopi av cilierna och genetisk testning. En PCD-diagnos förklarar hela bilden med en mekanism och ändrar uppföljning och ärftlighetsrådgivning.\n\nTA UPP SAMTIDIGT: öroninflammationer som barn, andningsstörning som nyfödd, situs inversus i familjen, fertilitet.",
+    "due_date": "2026-08-20",
+    "priority": "hög",
+    "type": "fysiologi",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["pcd_ers_2017", "bronkiektasi_ers_2017", "bronkiektasi_registry_2017"]
+  },
+  {
+    "title": "4. tTG-IgA + total-IgA – celiakiscreening",
+    "description": "VARFÖR: Aldrig taget, trots typ 1-diabetes sedan 11 års ålder (celiaki hos 5–16 % mot ca 1 % i befolkningen) och pågående viktnedgång. I 271 provsvar från åtta år finns inte ett enda tTG-IgA.\n\nDIN TOTAL-IgA ÄR NORMAL vid tre tillfällen (2,0 / 2,2 / 1,5 g/L), så serologin blir tolkbar utan förbehåll – det som annars är den vanligaste fällan.\n\nVAD SVARET ÄNDRAR: Positivt svar → gastroskopi med biopsi. Behandlingen är glutenfri kost, som kan vända viktnedgången direkt. Provet måste tas under pågående glutenintag.",
+    "due_date": "2026-08-05",
+    "priority": "hög",
+    "type": "blodprov",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["celiaki_who_to_test", "ada_children_2026", "ada_comorbid_2026"]
+  },
+  {
+    "title": "5. Ultraljud hals, vid behov med finnålspunktion",
+    "description": "VARFÖR: Du noterade själv 14 april 2025 en 0,8 cm knöl på höger halssida. Vårdcentralen noterade knölar på halsen och subklavikulärt redan 7 februari 2025. Ingen bilddiagnostik, ingen punktion och ingen uppföljning finns i materialet.\n\nReaktiv körtelsvullnad är mest sannolikt hos någon med kroniska luftvägsinfektioner – men ny lymfkörtel plus ofrivillig viktnedgång ska aldrig lämnas outredd.\n\nVAD SVARET ÄNDRAR: Ultraljudet skiljer reaktiv körtel från patologisk på storlek, form och kärlmönster. Normalt fynd stänger malignitetsfrågan som annars ligger kvar bakom varje annat provsvar.",
+    "due_date": "2026-08-12",
+    "priority": "hög",
+    "type": "bilddiagnostik",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["weightloss_cancer_bmj", "weightloss_occult_cancer"]
+  },
+  {
+    "title": "6. hCG, prolaktin och omprov östradiol + testikelundersökning",
+    "description": "VARFÖR: Östradiol 207 pmol/L mot övre referens kring 160, med normalt testosteron (28), normalt LH (2,1) och normalt SHBG (54), hos en 28-åring med erektil dysfunktion och viktnedgång. hCG-producerande testikeltumör är den diagnos som inte får missas – och den skulle kunna knyta ihop hormonfyndet med viktnedgången.\n\nVanligare orsaker: läkemedel, leverpåverkan, analysfel. ASAT var 1,13 µkat/L juni 2025 med normalt ALAT, normaliserat till 0,60 i januari 2026.\n\nBE OCKSÅ LABBET BEKRÄFTA fritt testosteron 11 – enheten nmol/L är sannolikt fel, värdet hör hemma i pmol/L.",
+    "due_date": "2026-08-05",
+    "priority": "hög",
+    "type": "blodprov",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["gynekomasti_nejm_2007", "weightloss_occult_cancer"]
+  },
+  {
+    "title": "Remiss till fysioterapeut för sekretmobilisering",
+    "description": "VARFÖR: Din behandling består av enbart luftrörsvidgande – Anoro, tidigare Atrovent, numera Oxis. Vid bronkiektasier är grundproblemet sekretstagnation, och basbehandlingen är daglig sekretmobilisering med PEP och inlärd huffing-teknik. Det är den åtgärd som minskar exacerbationer.\n\nJournalen 13 februari 2025 säger uttryckligen att slembesvären kvarstod dagligen trots Anoro och Atrovent – precis vad man ska vänta sig när sekretet inte mobiliseras.",
+    "due_date": "2026-08-07",
+    "priority": "hög",
+    "type": "remiss",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["bronkiektasi_ers_2017", "bronkiektasi_bts_2019"]
+  },
+  {
+    "title": "Skriv exacerbationsplan med stående antibiotikarecept",
+    "description": "VARFÖR: Under 2025 fick du fyra antibiotikakurer på tre månader – Doxyferm, Trim-Sulfa, Terracortril lokalt och Heracillin – varje gång efter att besvären hunnit bli tillräckligt stora för ett vårdbesök. Vid bronkiektasier ska tidig start vid definierade kriterier vara planerad i förväg.\n\nINNEHÅLL: Vilka symtom som utlöser start (ökad slemmängd, färgförändring, andfåddhet, feber), vilket preparat utifrån senaste odlingssvar, hur länge, och när du ska höra av dig i stället.",
+    "due_date": "2026-08-20",
+    "priority": "hög",
+    "type": "recept",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["bronkiektasi_bts_2019", "bronkiektasi_ers_2017"]
+  },
+  {
+    "title": "Efterhör DT bihålor som planerades april 2025",
+    "description": "VARFÖR: Dr Karin Toll på Karolinska ÖNH planerade undersökningen 17 april 2025 i samband med att diagnosen kronisk rinosinuit ställdes. I underlaget finns varken svar eller uppgift om att den blivit av.\n\nVAD SVARET ÄNDRAR: Utbredd pansinuit hos en vuxen med bronkiektasier stärker PCD-misstanken påtagligt. Undersökningen visar också om bihålorna fungerar som bakteriereservoar för luftvägarna, och om det finns en kirurgiskt åtgärdbar komponent.\n\nNOTERA: Sergelkliniken avfärdade kronisk sinuit 24 mars, Karolinska ställde diagnosen 17 april. DT avgör vem som hade rätt.",
+    "due_date": "2026-08-07",
+    "priority": "medel",
+    "type": "bilddiagnostik",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["rinosinuit_epos_2020", "pcd_ers_2017"]
+  },
+  {
+    "title": "7. Vaccinationssvar (pneumokockantikroppar) + IgG-subklasser 1–4",
+    "description": "VARFÖR: Dina totala immunglobuliner är normala vid tre tillfällen (IgG 11 → 11,9 → 12,0), vilket utesluter CVID. Men specifik antikroppsbrist och IgG-subklassbrist ger samma kliniska bild – recidiverande sinopulmonella infektioner med kapslade bakterier, exakt de H. influenzae och S. aureus som odlats fram hos dig – med normalt total-IgG.\n\nDIAGNOSEN STÄLLS bara genom att mäta antikroppssvar före och efter pneumokockvaccination.\n\nOBS: Budesonid och tidigare kortison kan sänka IgG. Ange aktuell dos på remissen.",
+    "due_date": "2026-09-10",
+    "priority": "medel",
+    "type": "remiss",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["iei_practice_parameter_2025", "cvid_systematic_review", "bronkiektasi_ers_2017"]
+  },
+  {
+    "title": "8. Rutinodling sputum inklusive Pseudomonas",
+    "description": "VARFÖR: Odlingar har hittills tagits när något hänt, inte enligt schema. Kronisk Pseudomonaskolonisering är den enskilt viktigaste prognostiska faktorn vid bronkiektasier – fler exacerbationer, snabbare lungfunktionsförlust, sämre livskvalitet. Nyupptäckt växt går ofta att eradikera, kronisk kolonisering gör det inte, och tidsfönstret är kort.\n\nINTERVALL: Var tredje till sjätte månad, och alltid vid exacerbation. Bygger samtidigt upp det resistensmönster antibiotikavalet ska vila på.",
+    "due_date": "2026-08-25",
+    "priority": "medel",
+    "type": "odling",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["bronkiektasi_ers_2017", "bronkiektasi_bts_2019", "bronkiektasi_registry_2017"]
+  },
+  {
+    "title": "9. Näringsstatus – ferritin, B12, folat, 25-OH-vitamin D, zink",
+    "description": "VARFÖR: D-vitamin var 58 nmol/L redan i september 2018 och har aldrig kontrollerats om på åtta år. Låga nivåer är kopplade till ökad infektionsbenägenhet, vilket är direkt relevant vid bronkiektasier.\n\nFlera samtidigt låga näringsmarkörer stärker dessutom celiakimisstanken oavsett hur serologin utfaller – och motiverar gastroskopi även vid negativ serologi.\n\nTAS I SAMMA STICK som celiakiproverna.",
+    "due_date": "2026-08-05",
+    "priority": "medel",
+    "type": "blodprov",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["celiaki_who_to_test", "ada_comorbid_2026", "bronkiektasi_bts_2019"]
+  },
+  {
+    "title": "10. Kreatinin + cystatin C + U-albumin/kreatinin",
+    "description": "VARFÖR: Kreatinin 107 µmol/L med eGFR 73 i januari 2026, mot 90 och eGFR 86 ett halvår tidigare. Serien sedan 2019 pendlar: 111 → 105 → 83 → 94 → 97 → 99 → 90 → 107. Albuminuri saknas genomgående (0,2–0,6 g/mol), vilket talar emot diabetesnefropati.\n\nKreatinin påverkas av muskelmassa, proteinintag och vätskestatus – och en pågående viktnedgång rör om i just de faktorerna. Cystatin C påverkas inte och gav eGFR 88 år 2024.\n\nVAD SVARET ÄNDRAR: Njurfunktionen måste vara kartlagd innan NTM- eller Pseudomonasbehandling – flera aktuella antibiotika är nefrotoxiska.",
+    "due_date": "2026-08-05",
+    "priority": "medel",
+    "type": "blodprov",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["ada_comorbid_2026"]
+  },
+  {
+    "title": "Kontrollera vaccinationsstatus – pneumokocker, influensa, covid",
+    "description": "VARFÖR: Vaccination hör till basbehandlingen vid bronkiektasier och finns inte dokumenterad någonstans i materialet. Pneumokockvaccinationen har dubbel funktion här: den är både skydd och det test som avgör om du har en specifik antikroppsbrist – mät antikroppar före och efter.",
+    "due_date": "2026-08-20",
+    "priority": "medel",
+    "type": "besök",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["bronkiektasi_ers_2017", "iei_practice_parameter_2025"]
+  },
+  {
+    "title": "Dietistkontakt för energität kost",
+    "description": "VARFÖR: Viktnedgång vid kronisk lungsjukdom är en behandlingsindikation i sig – undernäring försämrar både infektionsförsvar och andningsmuskulatur, vilket driver på fler exacerbationer. Kombinationen med typ 1-diabetes gör att kaloriökningen behöver planeras mot insulindoserna i stället för att improviseras.",
+    "due_date": "2026-08-25",
+    "priority": "medel",
+    "type": "remiss",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["bronkiektasi_ers_2017", "weightloss_occult_cancer"]
+  },
+  {
+    "title": "11. HbA1c + strukturerad CGM-genomgång",
+    "description": "VARFÖR: Lågt utbyte för viktfrågan – glukosuri kräver betydligt högre nivåer än dina. Men trenden 40 → 45 → 48 → 49 mmol/mol på arton månader är entydig och riktningen är fel.\n\nCGM 6–19 april 2026: 74 % tid i målområde, men 4 % på 3,0–3,8 och 1 % under 3,0, standardavvikelse 3,1. Variabiliteten är ett eget problem oberoende av medelvärdet.\n\nTA MED: Kolhydratkvoten har pendlat mellan 1:12 och 1:13 utan att landa, och vid padel räckte det inte att sänka basalen – att stänga av pumpen och äta kolhydrater i förväg fungerade enligt anteckningen 18 april.",
+    "due_date": "2026-09-01",
+    "priority": "medel",
+    "type": "besök",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["ada_diagnosis_2026", "t1d_jama_2026"]
+  },
+  {
+    "title": "12. Spirometri med reversibilitet + diffusionskapacitet",
+    "description": "VARFÖR: Spirometrin februari 2025 visade FEV1/FVC 0,72 – lätt obstruktivitet – men reversibilitetstest saknas i underlaget, och du står ändå på både LAMA (Anoro) och LABA (Oxis). Diffusionskapacitet har aldrig mätts.\n\nVAD SVARET ÄNDRAR: Utan reversibilitet kan luftrörsvidgande behandling omprövas i stället för att bara byggas på. Utgångsvärdet behövs också för att avgöra om bronkiektasierna progredierar.",
+    "due_date": "2026-09-15",
+    "priority": "medel",
+    "type": "fysiologi",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["bronkiektasi_ers_2017", "bronkiektasi_bts_2019"]
+  },
+  {
+    "title": "13. Total-IgE + Aspergillus-antikroppar (ABPA-screening)",
+    "description": "VARFÖR: ABPA hör till standardutredningen vid bronkiektasier. Hos dig är den osannolik – eosinofila har varit under 0,1 vid samtliga mätningar 2019, 2024 och 2025, och ABPA ger nästan alltid eosinofili.\n\nTAS ÄNDÅ eftersom provet är billigt och stänger en fråga som annars återkommer varje gång utredningen tas om från början.",
+    "due_date": "2026-09-15",
+    "priority": "låg",
+    "type": "blodprov",
+    "is_completed": false,
+    "is_paused": false,
+    "study_refs": ["bronkiektasi_ers_2017", "bronkiektasi_registry_2017"]
+  }
+]

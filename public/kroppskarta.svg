@@ -1,0 +1,277 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 560" width="400" height="560" role="img" aria-label="Kroppskarta – manlig figur mot svenskt insjölandskap">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5b8fc4"/>
+      <stop offset="45%" stop-color="#9dc0dd"/>
+      <stop offset="80%" stop-color="#dbe8f0"/>
+      <stop offset="100%" stop-color="#f2e6d2"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5d86a8"/>
+      <stop offset="55%" stop-color="#3f6484"/>
+      <stop offset="100%" stop-color="#2d4a64"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4e6b46"/>
+      <stop offset="45%" stop-color="#3c5638"/>
+      <stop offset="100%" stop-color="#22331f"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="0.74" cy="0.55" r="0.42">
+      <stop offset="0%" stop-color="#ffe9b8" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#ffd98a" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#ffd98a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bodyFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7fe3e0" stop-opacity="0.88"/>
+      <stop offset="55%" stop-color="#43b8c9" stop-opacity="0.86"/>
+      <stop offset="100%" stop-color="#2b7f9e" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="bodyShade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0b2b3a" stop-opacity="0.32"/>
+      <stop offset="42%" stop-color="#0b2b3a" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#e6ffff" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="faceSkin" x1="0.15" y1="0" x2="0.95" y2="1">
+      <stop offset="0%" stop-color="#eab88d"/>
+      <stop offset="42%" stop-color="#dda072"/>
+      <stop offset="100%" stop-color="#b57a52"/>
+    </linearGradient>
+    <linearGradient id="faceHair" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0%" stop-color="#efe4c6"/>
+      <stop offset="38%" stop-color="#d3c19a"/>
+      <stop offset="75%" stop-color="#b3a17c"/>
+      <stop offset="100%" stop-color="#8e8064"/>
+    </linearGradient>
+    <linearGradient id="faceLens" x1="0.1" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#9a6a33"/>
+      <stop offset="45%" stop-color="#66401b"/>
+      <stop offset="100%" stop-color="#3b2410"/>
+    </linearGradient>
+    <linearGradient id="faceFrame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a9793d"/>
+      <stop offset="50%" stop-color="#7b5327"/>
+      <stop offset="100%" stop-color="#59391a"/>
+    </linearGradient>
+    <filter id="bodyGlow" x="-30%" y="-15%" width="160%" height="130%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="frame">
+      <rect x="0" y="0" width="400" height="560" rx="18"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <!-- Himmel över Mälaren -->
+    <rect x="0" y="0" width="400" height="340" fill="url(#sky)"/>
+    <ellipse cx="296" cy="308" rx="170" ry="120" fill="url(#sunGlow)"/>
+    <circle cx="300" cy="312" r="15" fill="#ffeec4" opacity="0.85"/>
+
+    <!-- Höga cirrusmoln -->
+    <g fill="#ffffff" opacity="0.38">
+      <ellipse cx="96" cy="66" rx="62" ry="9"/>
+      <ellipse cx="132" cy="80" rx="44" ry="6"/>
+      <ellipse cx="288" cy="112" rx="70" ry="8"/>
+      <ellipse cx="250" cy="128" rx="40" ry="5"/>
+    </g>
+
+    <!-- Fåglar -->
+    <g stroke="#3b556c" stroke-width="1.6" fill="none" opacity="0.55" stroke-linecap="round">
+      <path d="M84 132 q7 -6 13 0 q6 -6 13 0"/>
+      <path d="M126 158 q5 -4 9 0 q4 -4 9 0"/>
+    </g>
+
+    <!-- Granskog vid horisonten -->
+    <g fill="#24402f">
+      <path d="M0 334 L0 306 l10 -22 l7 14 l6 -18 l8 20 l7 -12 l9 24 l7 -16 l8 18 l6 -10 l9 22 l8 -18 l7 16 l9 -22 l8 24 l7 -14 l9 18 l8 -20 l7 22 l9 -16 l8 18 l7 -12 l9 20 l8 -22 l7 18 l9 -14 l8 22 l7 -18 l9 20 l8 -12 l7 18 l9 -22 l8 24 l7 -16 l9 18 l8 -20 l7 22 l9 -14 l8 18 l7 -10 l9 20 l8 -18 l7 16 l9 -20 l8 24 l6 -12 l7 18 L400 306 l0 28 Z"/>
+    </g>
+    <!-- Fjärran udde -->
+    <path d="M0 336 q60 -10 118 -2 q52 8 96 0 q60 -10 128 2 q34 4 58 0 L400 340 L0 340 Z" fill="#1d3527" opacity="0.75"/>
+
+    <!-- Vattnet -->
+    <rect x="0" y="336" width="400" height="98" fill="url(#water)"/>
+    <g stroke="#cfe4f2" stroke-linecap="round" opacity="0.3">
+      <path d="M28 352 h58" stroke-width="2"/>
+      <path d="M120 348 h34" stroke-width="1.6"/>
+      <path d="M232 356 h72" stroke-width="2"/>
+      <path d="M44 372 h44" stroke-width="1.6"/>
+      <path d="M256 376 h58" stroke-width="1.8"/>
+      <path d="M96 392 h70" stroke-width="2"/>
+      <path d="M282 398 h48" stroke-width="1.6"/>
+      <path d="M36 412 h62" stroke-width="1.8"/>
+      <path d="M196 418 h84" stroke-width="2"/>
+    </g>
+    <!-- Solstig i vattnet -->
+    <g fill="#ffe6b0" opacity="0.28">
+      <rect x="286" y="342" width="28" height="4" rx="2"/>
+      <rect x="280" y="356" width="40" height="4" rx="2"/>
+      <rect x="286" y="372" width="30" height="5" rx="2"/>
+      <rect x="276" y="390" width="48" height="4" rx="2"/>
+      <rect x="288" y="408" width="26" height="5" rx="2"/>
+    </g>
+
+    <!-- Falurött hus med vita knutar -->
+    <g transform="translate(36 268)">
+      <rect x="10" y="22" width="58" height="40" fill="#8c3b2e"/>
+      <path d="M4 24 L39 2 L74 24 Z" fill="#4c3a33"/>
+      <rect x="10" y="22" width="5" height="40" fill="#f2ece1"/>
+      <rect x="63" y="22" width="5" height="40" fill="#f2ece1"/>
+      <rect x="24" y="34" width="13" height="13" fill="#f7e6ad"/>
+      <rect x="44" y="34" width="13" height="13" fill="#f7e6ad"/>
+      <rect x="33" y="50" width="12" height="12" fill="#f2ece1"/>
+      <rect x="52" y="4" width="7" height="14" fill="#6b5148"/>
+    </g>
+    <!-- Brygga -->
+    <g fill="#5a4636" opacity="0.9">
+      <rect x="96" y="330" width="52" height="5" rx="2"/>
+      <rect x="102" y="335" width="4" height="14"/>
+      <rect x="138" y="335" width="4" height="14"/>
+    </g>
+
+    <!-- Svensk flagga på stång -->
+    <g transform="translate(330 232)">
+      <rect x="0" y="0" width="3" height="104" fill="#8a8f93"/>
+      <g transform="translate(3 6)">
+        <rect x="0" y="0" width="46" height="29" fill="#006AA7"/>
+        <rect x="0" y="12" width="46" height="6" fill="#FECC00"/>
+        <rect x="14" y="0" width="6" height="29" fill="#FECC00"/>
+      </g>
+    </g>
+
+    <!-- Strandkant och förgrund -->
+    <path d="M0 428 q52 -8 104 -2 q60 8 110 -2 q64 -10 122 4 q34 4 64 -2 L400 560 L0 560 Z" fill="url(#ground)"/>
+    <g fill="#6c8a5c" opacity="0.4">
+      <ellipse cx="60" cy="470" rx="52" ry="12"/>
+      <ellipse cx="330" cy="486" rx="62" ry="14"/>
+      <ellipse cx="196" cy="530" rx="120" ry="20"/>
+    </g>
+    <!-- Klippor -->
+    <g fill="#7d8577" opacity="0.65">
+      <path d="M18 452 q16 -16 34 -4 q14 10 2 16 q-22 6 -36 -12 Z"/>
+      <path d="M320 470 q22 -18 44 -4 q16 10 0 18 q-28 8 -44 -14 Z"/>
+    </g>
+    <!-- Vass -->
+    <g stroke="#4a6340" stroke-width="2" stroke-linecap="round" opacity="0.75">
+      <path d="M12 436 q4 -22 2 -34"/>
+      <path d="M22 438 q6 -20 8 -30"/>
+      <path d="M372 442 q-4 -22 -2 -32"/>
+      <path d="M384 444 q-6 -18 -4 -28"/>
+    </g>
+
+    <!-- ==================== FIGUREN (man) ==================== -->
+    <g filter="url(#bodyGlow)">
+      <!-- Skugga på marken -->
+      <ellipse cx="200" cy="536" rx="72" ry="13" fill="#0d1a12" opacity="0.45"/>
+
+      <g fill="url(#bodyFill)" stroke="#c9f7ff" stroke-width="1.4" stroke-linejoin="round">
+        <!-- Ansiktet tecknat efter patientens foto: solbränd hy, ljust
+             bakåtkammat hår, bruna solglasögon och grå stubb. -->
+        <g stroke="none">
+          <!-- Öron -->
+          <path d="M175 52 C170 49 167 54 168 61 C170 67 174 69 176 67 Z" fill="#c2855c"/>
+          <path d="M225 52 C230 49 233 54 232 61 C230 67 226 69 224 67 Z" fill="#c2855c"/>
+          <!-- Huvud med bred käke -->
+          <path d="M174 52 C174 28 185 19 200 19 C215 19 226 28 226 52
+                   C226 67 222 80 214 88 C209 93 191 93 186 88 C178 80 174 67 174 52 Z"
+                fill="url(#faceSkin)"/>
+          <!-- Hår -->
+          <path d="M172 55 C168 24 181 12 200 12 C218 12 230 20 229 39
+                   C229 45 228 50 228 55 C226 42 222 34 215 30
+                   C208 35 191 37 182 33 C176 37 173 46 172 55 Z"
+                fill="url(#faceHair)"/>
+          <path d="M172 54 C171 45 173 38 177 33 C174 39 172 46 172 54 Z" fill="#b6ac93"/>
+          <path d="M228 54 C229 45 227 38 223 33 C226 39 228 46 228 54 Z" fill="#b6ac93"/>
+          <!-- Grå stubb över käke och haka -->
+          <path d="M177 62 C179 78 187 89 200 89 C213 89 221 78 223 62
+                   C220 78 212 85 200 85 C188 85 180 78 177 62 Z"
+                fill="#b9b3a4" opacity="0.62"/>
+          <path d="M186 73 q14 5 28 0 q-14 8 -28 0 Z" fill="#b9b3a4" opacity="0.5"/>
+          <!-- Solglasögon -->
+          <path d="M172 50 C176 47 179 46 182 47" stroke="url(#faceFrame)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <path d="M228 50 C224 47 221 46 218 47" stroke="url(#faceFrame)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <rect x="179" y="45" width="20" height="15" rx="6" fill="url(#faceLens)"/>
+          <rect x="201" y="45" width="20" height="15" rx="6" fill="url(#faceLens)"/>
+          <rect x="179" y="45" width="20" height="15" rx="6" fill="none" stroke="url(#faceFrame)" stroke-width="2.2"/>
+          <rect x="201" y="45" width="20" height="15" rx="6" fill="none" stroke="url(#faceFrame)" stroke-width="2.2"/>
+          <path d="M199 48 C199.8 46.5 200.2 46.5 201 48" stroke="url(#faceFrame)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M182 48 l6 0 l-5 8 l-4 0 Z" fill="#ffffff" opacity="0.22"/>
+          <path d="M204 48 l6 0 l-5 8 l-4 0 Z" fill="#ffffff" opacity="0.22"/>
+          <!-- Näsa och mun -->
+          <path d="M200 60 C199 67 198 71 199 73 C200 74 202 74 203 73"
+                stroke="#a9714f" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.75"/>
+          <path d="M192 79 q8 4 16 0" stroke="#8a4c33" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- Hals -->
+        <path d="M188 86 L212 86 L214 106 L186 106 Z" fill="#c2855c" stroke="none"/>
+
+        <!-- Bål med breda axlar -->
+        <path d="M200 98
+                 C 226 98 246 106 254 122
+                 C 260 148 255 180 247 210
+                 C 243 234 241 254 245 284
+                 C 247 298 241 306 229 306
+                 L 171 306
+                 C 159 306 153 298 155 284
+                 C 159 254 157 234 153 210
+                 C 145 180 140 148 146 122
+                 C 154 106 174 98 200 98 Z"/>
+
+        <!-- Vänster arm (betraktarens vänstra = patientens högra) -->
+        <path d="M150 118
+                 C 137 130 131 162 129 198
+                 C 127 234 125 268 123 298
+                 C 122 314 125 330 130 340
+                 C 137 345 146 342 147 333
+                 C 151 302 155 266 157 232
+                 C 159 198 161 160 163 130 Z"/>
+        <!-- Höger arm -->
+        <path d="M250 118
+                 C 263 130 269 162 271 198
+                 C 273 234 275 268 277 298
+                 C 278 314 275 330 270 340
+                 C 263 345 254 342 253 333
+                 C 249 302 245 266 243 232
+                 C 241 198 239 160 237 130 Z"/>
+
+        <!-- Höger ben (betraktarens vänstra) -->
+        <path d="M165 296
+                 C 161 332 164 372 168 404
+                 C 171 442 172 474 174 506
+                 L 192 506
+                 C 193 474 194 442 195 404
+                 C 198 372 200 332 199 296 Z"/>
+        <!-- Vänster ben -->
+        <path d="M235 296
+                 C 239 332 236 372 232 404
+                 C 229 442 228 474 226 506
+                 L 208 506
+                 C 207 474 206 442 205 404
+                 C 202 372 200 332 201 296 Z"/>
+
+        <!-- Fötter -->
+        <ellipse cx="183" cy="518" rx="14" ry="13"/>
+        <ellipse cx="217" cy="518" rx="14" ry="13"/>
+      </g>
+
+      <!-- Volymskuggning -->
+      <g fill="url(#bodyShade)" opacity="0.85" pointer-events="none">
+        <path d="M200 98 C 226 98 246 106 254 122 C 260 148 255 180 247 210 C 243 234 241 254 245 284 C 247 298 241 306 229 306 L 171 306 C 159 306 153 298 155 284 C 159 254 157 234 153 210 C 145 180 140 148 146 122 C 154 106 174 98 200 98 Z"/>
+      </g>
+
+      <!-- Anatomiska konturlinjer -->
+      <g stroke="#dcfbff" stroke-width="1.1" fill="none" opacity="0.5" stroke-linecap="round">
+        <path d="M200 108 L200 292"/>
+        <path d="M172 150 q28 12 56 0"/>
+        <path d="M168 196 q32 10 64 0"/>
+        <path d="M162 240 q38 9 76 0"/>
+        <path d="M176 286 q24 6 48 0"/>
+        <path d="M182 404 q0 0 0 0 M174 404 h18 M208 404 h18"/>
+      </g>
+    </g>
+  </g>
+
+  <rect x="0.75" y="0.75" width="398.5" height="558.5" rx="18" fill="none" stroke="#0f2b38" stroke-opacity="0.45" stroke-width="1.5"/>
+</svg>

@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Insulin via pump",
+    "drug_class": "Snabbverkande insulinanalog",
+    "dosage": "Basal 1 E/h · kolhydratkvot 1:12 · korrektion 1 E per 4,4 · target 5,0",
+    "times_of_day": ["morgon", "lunch", "kväll", "natt"],
+    "purpose": "Typ 1-diabetes sedan 11 års ålder",
+    "instructions": "Inställningarna ovan är de senast antecknade (20 april 2026). Kvoten har pendlat mellan 1:12 och 1:13 – 1:13 gav höga värden efter måltid, 1:12 gav hypoglykemi vid McDonald's och padel.",
+    "status": "aktiv",
+    "is_active": true,
+    "risk_notes": "CGM 6–19 april 2026: 74 % tid i målområde, men 5 % under 3,9 mmol/L varav 1 % under 3,0. Standardavvikelse 3,1 mmol/L talar för stor variabilitet. Vid fysisk aktivitet har enbart basalsänkning inte räckt – att stänga av pumpen och äta kolhydrater i förväg har fungerat bättre.",
+    "study_refs": ["ada_diagnosis_2026", "t1d_jama_2026"]
+  },
+  {
+    "name": "Dexcom G7",
+    "drug_class": "Kontinuerlig glukosmätare",
+    "dosage": "Sensor byts enligt tillverkarens intervall",
+    "times_of_day": ["morgon"],
+    "purpose": "Kontinuerlig glukosmätning – underlag för dosjustering",
+    "instructions": "Beställd 2025-02-10 av diabetessköterska Gudrun Andersson som ersättning för Dexcom G6.",
+    "status": "aktiv",
+    "is_active": true,
+    "risk_notes": ""
+  },
+  {
+    "name": "Anoro Ellipta",
+    "drug_class": "LAMA + LABA (umeklidinium/vilanterol)",
+    "dosage": "1 inhalation dagligen",
+    "times_of_day": ["morgon"],
+    "purpose": "Luftrörsvidgande vid bronkiektasier och kronisk bronkit",
+    "instructions": "Skölj munnen efter inhalation.",
+    "status": "aktiv",
+    "is_active": true,
+    "risk_notes": "Dagliga slembesvär kvarstod trots Anoro och Atrovent (2025-02-13). Luftrörsvidgande behandlar inte sekretstagnationen – sekretmobilisering med PEP och fysioterapi är basbehandling vid bronkiektasier och saknas i dokumentationen.",
+    "study_refs": ["bronkiektasi_ers_2017", "bronkiektasi_bts_2019"]
+  },
+  {
+    "name": "Oxis",
+    "drug_class": "LABA (formoterol)",
+    "dosage": "Enligt ordination",
+    "times_of_day": ["morgon", "kväll"],
+    "purpose": "Luftrörsvidgande – ersatte Atrovent 2025-02-13",
+    "instructions": "Insatt av dr Michael Runold när Atrovent inte gav tillräcklig effekt.",
+    "status": "aktiv",
+    "is_active": true,
+    "risk_notes": ""
+  },
+  {
+    "name": "Budesonid nässköljning",
+    "drug_class": "Lokal kortikosteroid",
+    "dosage": "Sköljning morgon och kväll",
+    "times_of_day": ["morgon", "kväll"],
+    "purpose": "Kronisk rinosinuit",
+    "instructions": "Insatt 2025-04-17 av dr Karin Toll, Karolinska ÖNH. Ersatte Ryaltris.",
+    "status": "aktiv",
+    "is_active": true,
+    "risk_notes": "Långvarig lokal och systemisk kortikosteroidbehandling kan sänka IgG-nivåerna. Ange aktuell dos om immunologisk utredning görs.",
+    "study_refs": ["rinosinuit_epos_2020"]
+  },
+  {
+    "name": "Ryaltris",
+    "drug_class": "Nässpray (olopatadin/mometason)",
+    "dosage": "Enligt ordination",
+    "times_of_day": ["morgon"],
+    "purpose": "Näs- och bihålebesvär",
+    "instructions": "Insatt 2025-03-24 av dr Balcarras Crafoord, Sergelkliniken.",
+    "status": "pausad",
+    "is_active": false,
+    "paused_reason": "Ersatt av Budesonidsköljning morgon och kväll efter ÖNH-bedömningen på Karolinska 2025-04-17."
+  },
+  {
+    "name": "Atrovent",
+    "drug_class": "SAMA (ipratropium)",
+    "dosage": "Enligt ordination",
+    "times_of_day": ["morgon"],
+    "purpose": "Luftrörsvidgande",
+    "instructions": "",
+    "status": "pausad",
+    "is_active": false,
+    "paused_reason": "Utbytt mot Oxis 2025-02-13 eftersom dagliga slembesvär kvarstod."
+  }
+]

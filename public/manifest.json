@@ -1,0 +1,13 @@
+{
+  "name": "Marcs HälsoAI",
+  "short_name": "HälsoAI",
+  "description": "Utredningsplan och evidensbank vid viktnedgång, typ 1-diabetes, astma och recidiverande infektioner",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d10",
+  "theme_color": "#0d0d10",
+  "lang": "sv-SE",
+  "icons": [
+    { "src": "/profil.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
