@@ -9,13 +9,15 @@ import realJournalEntries from "./realdata/JournalEntry.json";
 import realUpcomingActions from "./realdata/UpcomingAction.json";
 import realMedications from "./realdata/Medication.json";
 import realAdverseDrugHistory from "./realdata/AdverseDrugHistory.json";
+// Dygnsstatistik + måltider från det nattliga jobbet tools/daglig-glukos.js.
+import realGlucoseDays from "./realdata/GlucoseDay.json";
 import { seedUser } from "./seedData";
 
 const STORE_PREFIX = "local_base44_";
 const SEED_VERSION_KEY = `${STORE_PREFIX}seed_version`;
 // Höj den här när realdata/*.json ändras, annars behåller återvändande
 // besökare den gamla kopian i localStorage.
-const SEED_VERSION = "marc-2026-07-25b-full";
+const SEED_VERSION = "marc-2026-09-29c-glukos";
 
 let idCounter = Date.now();
 const newId = () => `loc_${(idCounter++).toString(36)}`;
@@ -41,6 +43,7 @@ function seedIfNeeded() {
     JournalEntry: realJournalEntries,
     UpcomingAction: realUpcomingActions,
     AdverseDrugHistory: realAdverseDrugHistory,
+    GlucoseDay: realGlucoseDays,
   };
   const now = new Date().toISOString();
   for (const [name, rows] of Object.entries(seeds)) {

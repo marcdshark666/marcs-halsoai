@@ -9,7 +9,12 @@
     "lint": "eslint . --quiet",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc -p ./jsconfig.json",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "glukos": "node tools/daglig-glukos.js",
+    "set-dexcom": "node tools/set-dexcom.js",
+    "set-gemini": "node tools/set-gemini.js",
+    "google-login": "node tools/google-login.js",
+    "test:glukos": "node --test tools/tests/glukos.test.mjs"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^17.0.0",

@@ -2,8 +2,9 @@ import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { Calendar, FileText, Heart, Sparkles, FlaskConical,
-  LayoutDashboard, Bell, Pill,
+  LayoutDashboard, Bell, Pill, Droplet,
 } from "lucide-react";
+import GlucoseFood from "@/components/health/GlucoseFood";
 import SearchBar from "@/components/health/SearchBar";
 import LabValueCard from "@/components/health/LabValueCard";
 import TrendChart from "@/components/health/TrendChart";
@@ -53,6 +54,7 @@ const STATUS_SEVERITY = { critical_high: 0, critical_low: 0, high: 1, low: 1, no
 // Navigeringen scrollar till respektive sektion på sidan.
 const NAV_ITEMS = [
   { icon: LayoutDashboard, label: "Översikt", target: "top" },
+  { icon: Droplet, label: "Blodsocker", target: "blodsocker" },
   { icon: FlaskConical, label: "Prover", target: "prover" },
   { icon: Calendar, label: "Att göra", target: "kalender" },
   { icon: Pill, label: "Behandling", target: "plan" },
@@ -92,6 +94,11 @@ export default function Dashboard() {
   const { data: medications = [] } = useQuery({
     queryKey: ["medications"],
     queryFn: () => base44.entities.Medication.list(),
+  });
+
+  const { data: glucoseDays = [] } = useQuery({
+    queryKey: ["glucoseDays"],
+    queryFn: () => base44.entities.GlucoseDay.list("-date", 120),
   });
 
   // Hela historiken grupperad per normaliserat testnamn, kronologiskt sorterad.
@@ -286,6 +293,11 @@ export default function Dashboard() {
               setTimeout(() => document.getElementById("trend-detalj")?.scrollIntoView({ behavior: "smooth", block: "center" }), 80);
             }}
           />
+        </div>
+
+        {/* Blodsocker & mat – dygnsstatistik från Dexcom + matfoton med kurvan efteråt */}
+        <div id="blodsocker" className="mb-6 scroll-mt-20">
+          <GlucoseFood days={glucoseDays} />
         </div>
 
         {/* Rekommenderade prover – rangordnade efter kliniskt utbyte */}

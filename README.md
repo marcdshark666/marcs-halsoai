@@ -20,6 +20,9 @@ provsvar eller bilder**. Allt kliniskt innehåll här gäller Marc.
 - **Evidenssök** – 19 källor (ADA Standards of Care 2026, Gastroenterology 2024,
   Front Immunol 2021, JAMA Intern Med 2025, BMJ 2024 m.fl.) med kategorifilter.
 - **Daglig checklista** – blodsocker, insulin, vikt, astma och infektionstecken.
+- **Blodsocker & mat** – dygnsstatistik från Dexcom G7 (Share), matfoton via
+  Google Foto och kurvan efter varje måltid. Fylls av det nattliga jobbet
+  `tools/daglig-glukos.js` – se **GLUKOS.md** för uppsättning och vad Marc gör själv.
 
 ## Vad som saknas
 

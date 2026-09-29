@@ -37,6 +37,8 @@ node_modules/
 *.key
 *.pem
 secrets/
+# Glukosjobbet: testutdata (syntetisk) – aldrig i sajten
+tools/tests/out/
 Thumbs.db
 __pycache__/
 *.py[cod]
