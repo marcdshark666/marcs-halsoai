@@ -85,6 +85,10 @@ function loadDays() {
   return Array.isArray(rows) ? rows : [];
 }
 function saveDays(days) {
+  // Tomma dygn (ingen statistik, inga måltider) ska inte bli tomma kort på sajten.
+  for (let i = days.length - 1; i >= 0; i--) {
+    if (!Number.isFinite(days[i].avg) && !(days[i].meals || []).length) days.splice(i, 1);
+  }
   days.sort((a, b) => (a.date < b.date ? -1 : 1));
   fs.mkdirSync(path.dirname(PATHS.days), { recursive: true });
   fs.writeFileSync(PATHS.days, JSON.stringify(days, null, 1), "utf8");
