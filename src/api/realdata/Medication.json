@@ -2,7 +2,7 @@
   {
     "name": "Insulin via pump",
     "drug_class": "Snabbverkande insulinanalog",
-    "dosage": "Basal 1 E/h · kolhydratkvot 1:12 · korrektion 1 E per 4,4 · target 5,0",
+    "dosage": "Basal 0,9 E/h (30/9 2026) · kolhydratkvot 1:15 (30/9 2026) · korrektion 1 E per 1,6 (30/9 2026, bekräftad) · target 5,0",
     "times_of_day": ["morgon", "lunch", "kväll", "natt"],
     "purpose": "Typ 1-diabetes sedan 11 års ålder",
     "instructions": "Inställningarna ovan är de senast antecknade (20 april 2026). Kvoten har pendlat mellan 1:12 och 1:13 – 1:13 gav höga värden efter måltid, 1:12 gav hypoglykemi vid McDonald's och padel.",
