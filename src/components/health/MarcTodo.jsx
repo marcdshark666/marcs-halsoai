@@ -16,7 +16,7 @@ const GROUPS = [
       { id: "github-pages", text: "Kör `gh auth refresh -h github.com -s workflow`, sedan `git push` och `gh api -X POST repos/marcdshark666/marcs-halsoai/pages -f build_type=workflow` – startar GitHub-sidan." },
       { id: "google-photos", text: "Google Photos Picker: aktivera API:t i Sugar Buddys Google Cloud-projekt och kör `npm run google-login` (steg i GLUKOS.md)." },
       { id: "gemini", text: "(Frivilligt) `npm run set-gemini` – samma gratis Gemini-nyckel som Sugar Buddy." },
-      { id: "permissions", text: "Lägg in behörighetsregel i Claude Code (/permissions) för git add/commit/push, gh repo create och vercel – så uppdateras sidan automatiskt." },
+      { id: "permissions", text: "Lägg in behörighetsregel i Claude Code (/permissions) för git add/commit/push och gh repo create – så uppdateras sidan automatiskt." },
     ],
   },
   {
