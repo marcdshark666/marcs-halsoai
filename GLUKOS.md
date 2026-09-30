@@ -11,8 +11,8 @@ Telegram-länk ──► Google Foto Picker ──► matbilder ──► Gemini
                                               └──► CGM-kurvan 0–4 h efter maten ──► flagga
 ```
 
-**Beslutsstöd, inte journalhandling.** Ingen kod här räknar, föreslår eller nämner
-insulinenheter. Kurvflaggorna beskriver kurvans form och är underlag för samtal
+**Beslutsstöd, inte journalhandling.** Ingen kod här räknar eller föreslår
+insulinenheter, kvoter eller faktorer – pumpens loggade doser (Glooko) visas bara som de är. Kurvflaggorna beskriver kurvans form och är underlag för samtal
 med diabetesteamet.
 
 ## Filer
@@ -104,6 +104,32 @@ ut med bara blodsockret. Bilder kan väljas i efterhand:
 Texten på sajten formuleras alltid som ett mönster att ta upp med diabetesteamet.
 `stripDoseTalk()` filtrerar dessutom bort varje mening från språkmodellen som nämner
 enheter eller doser.
+
+## Insulin via Glooko (doser + mönster + Telegram-larm)
+
+```
+npm run set-glooko      # e-post, lösenord (visas inte), server eu/us – testar inloggningen
+```
+Sparas i `%APPDATA%\marcs-halsoai\glooko.json`. Varje natt hämtas gårdagens och dagens
+bolusar (tid, enheter, kolhydrater) och basalposter → `insulin` på dygnsposten.
+Saknas Dexcom men Glooko ger CGM blir Glooko blodsockerkällan (en inloggning räcker).
+
+| Fil | Ansvar |
+|---|---|
+| `tools/glukos/glooko.mjs` | Node-kopia av Sugar Buddys `api/glooko.js` (sign_in, EU/US, kandidat-endpoints, normalisering, `diag` utan uppgifter) |
+| `src/lib/glukos/doses.js` | observationsdelen av Sugar Buddys `doseInsights.js` (gren `dosinsikt`) – **utan** procent, faktorer, kvoter och dosförslag |
+| `tools/tests/doser.test.mjs` | handräknade fall för dosanalys, mönster och Glooko-normalisering |
+| `data/glukos-larm.json` | vilka mönster som larmats och när (max ett larm per dygn) |
+
+Mönster över 14 dygn (minst 3 bedömbara observationer, minst 2 träffar och ≥ 1/3):
+korrektion → lågt < 3,9 inom 4 h (larm) · korrektion kvar > 10 efter 3 h · måltidsbolus → lågt
+(larm) · måltidsbolus > 10 efter 3 h (även bara stora måltider ≥ 60 g) · natt 23–06 < 3,9 (larm) ·
+ostörd natt stiger/sjunker > 1,5 · dygn med > 25 % över 13,9 (larm) · > 13,9 i ≥ 3 h utan bolus
+= ketonrisk (larm). Telegram går bara när ett larmvärt mönster är nytt/fler träffar/7 dygn sedan,
+max en gång per dygn, med beslutsstödstexten. Ingen kod räknar doser, kvoter eller faktorer
+(`DOSE_TALK`-spärren testas).
+
+Sugar Buddys egna värden ligger bara i mobilwebbläsarens localStorage och kan inte läsas härifrån.
 
 ## Testa utan riktiga uppgifter
 ```

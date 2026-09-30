@@ -13,8 +13,9 @@
     "glukos": "node tools/daglig-glukos.js",
     "set-dexcom": "node tools/set-dexcom.js",
     "set-gemini": "node tools/set-gemini.js",
+    "set-glooko": "node tools/set-glooko.js",
     "google-login": "node tools/google-login.js",
-    "test:glukos": "node --test tools/tests/glukos.test.mjs"
+    "test:glukos": "node --test tools/tests/glukos.test.mjs tools/tests/doser.test.mjs"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^17.0.0",

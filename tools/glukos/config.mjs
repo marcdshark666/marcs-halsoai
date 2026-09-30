@@ -13,6 +13,7 @@ export const CONFIG_DIR = process.env.MARCS_HALSOAI_CONFIG
 export const DEXCOM_FILE = path.join(CONFIG_DIR, "dexcom.json");
 export const GOOGLE_FILE = path.join(CONFIG_DIR, "google.json");
 export const GEMINI_FILE = path.join(CONFIG_DIR, "gemini.json");
+export const GLOOKO_FILE = path.join(CONFIG_DIR, "glooko.json");
 
 export function ensureConfigDir() {
   fs.mkdirSync(CONFIG_DIR, { recursive: true });

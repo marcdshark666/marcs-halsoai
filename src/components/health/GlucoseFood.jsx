@@ -2,8 +2,9 @@ import { useMemo, useState } from "react";
 import { format } from "date-fns";
 import { sv } from "date-fns/locale";
 import { Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ResponsiveContainer, ComposedChart } from "recharts";
-import { Droplet, TrendingUp, TrendingDown, Minus, Utensils, AlertTriangle, Info, Moon, Sunrise, Sun, Sunset } from "lucide-react";
+import { Droplet, TrendingUp, TrendingDown, Minus, Utensils, AlertTriangle, Info, Moon, Sunrise, Sun, Sunset, Syringe, Activity } from "lucide-react";
 import { FLAG_TEXT } from "@/lib/glukos/meals";
+import { DISCLAIMER } from "@/lib/glukos/doses";
 
 // "Blodsocker & mat": dygnskort, trendgraf och måltidslista med kurvan efter
 // maten. Datat kommer från src/api/realdata/GlucoseDay.json som fylls av det
@@ -178,6 +179,111 @@ function MealRow({ meal }) {
   );
 }
 
+const SOURCE_LABEL = { "dexcom-share": "Dexcom G7 via Share", glooko: "CGM via Glooko", syntetisk: "SYNTETISK testdata" };
+
+// Utfallet av en loggad bolus – beskriver kurvan, aldrig vad dosen borde ha varit.
+const VERDICT = {
+  low: { text: "lågt inom 4 h", cls: "bg-red-500/15 text-red-400 ring-1 ring-red-500/30" },
+  still_high: { text: "över 10 efter 3 h", cls: "bg-amber-500/15 text-amber-400 ring-1 ring-amber-500/30" },
+  in_range: { text: "3,9–10 efter 3 h", cls: "bg-emerald-500/15 text-emerald-400" },
+  no_data: { text: "kurvan saknas", cls: "bg-secondary text-muted-foreground" },
+};
+
+function BolusRow({ bolus, evalItem }) {
+  const v = VERDICT[evalItem?.verdict] || null;
+  return (
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 px-3 py-2 rounded-lg bg-secondary/30 border border-border/60 text-xs">
+      <span className="font-mono text-muted-foreground w-11">{format(new Date(bolus.time), "HH:mm", { locale: sv })}</span>
+      <span className="font-semibold">{sv1(bolus.units)} E</span>
+      <span className="text-muted-foreground">{bolus.kind === "meal" ? `måltid · ${bolus.carbs} g kh` : "korrektion"}</span>
+      {evalItem && evalItem.verdict !== "no_data" && (
+        <span className="text-muted-foreground font-mono">
+          {sv1(evalItem.bg0)} → {sv1(evalItem.bg3)} efter 3 h{evalItem.peak != null ? ` · topp ${sv1(evalItem.peak)}` : ""}
+          {evalItem.hypo ? ` · lägst ${sv1(evalItem.nadir)}` : ""}
+        </span>
+      )}
+      <span className="ml-auto flex gap-1.5">
+        {evalItem?.excluded && <span className="px-2 py-0.5 rounded-md bg-secondary text-muted-foreground">{evalItem.excluded}</span>}
+        {v && <span className={`px-2 py-0.5 rounded-md font-medium ${v.cls}`}>{v.text}</span>}
+      </span>
+    </div>
+  );
+}
+
+function InsulinDay({ day }) {
+  const ins = day.insulin;
+  if (!ins) return null;
+  const s = ins.summary || {};
+  const evals = new Map([...(ins.corrections || []), ...(ins.mealBoluses || [])].map((e) => [e.time, e]));
+  const rates = [...new Set((ins.basals || []).map((b) => b.rate))];
+  const tiles = [
+    ["Bolusar", `${s.n_bolus ?? 0}`, `${s.n_meal ?? 0} måltid · ${s.n_correction ?? 0} korrektion`],
+    ["Bolus totalt", `${sv1(s.bolus_units ?? 0)} E`, "som pumpen loggat"],
+    ["Angivna kolhydrater", `${s.carbs_g ?? 0} g`, "i bolusguiden"],
+    ["Basal", rates.length ? `${rates.map((r) => sv1(r)).join(" / ")} E/h` : "–", rates.length ? "loggade basalposter" : "ingen basalpost hämtad"],
+  ];
+  return (
+    <div>
+      <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
+        <Syringe className="w-3.5 h-3.5" />Insulin från pumpen ({ins.source === "syntetisk" ? "SYNTETISK" : "Glooko"})
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-2.5">
+        {tiles.map(([label, value, sub]) => (
+          <div key={label} className="p-3 rounded-xl bg-secondary/40 border border-border/60">
+            <div className="text-[11px] text-muted-foreground">{label}</div>
+            <div className="text-lg font-bold leading-tight mt-0.5">{value}</div>
+            <div className="text-[10px] text-muted-foreground">{sub}</div>
+          </div>
+        ))}
+      </div>
+      {ins.boluses?.length ? (
+        <div className="space-y-1.5">
+          {ins.boluses.map((b) => <BolusRow key={b.time} bolus={b} evalItem={evals.get(b.time)} />)}
+        </div>
+      ) : (
+        <p className="text-sm text-muted-foreground py-2">Inga bolusar registrerade det här dygnet.</p>
+      )}
+      {day.night && (
+        <p className="text-[11px] text-muted-foreground mt-2">
+          <Moon className="w-3 h-3 inline mr-1" />
+          Natten kl 23–06: {sv1(day.night.bgStart)} → {sv1(day.night.bgEnd)} mmol/L
+          ({day.night.delta > 0 ? "+" : ""}{sv1(day.night.delta)}), lägst {sv1(day.night.nadir)}
+          {day.night.hypo && <span className="text-red-400 font-medium"> · under 3,9</span>}
+          {day.night.excluded && ` · ${day.night.excluded} – räknas inte i nattmönstret`}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function Patterns({ patterns }) {
+  if (!patterns) return null;
+  const c = patterns.counts || {};
+  return (
+    <div className="p-4 rounded-xl border border-border/60 bg-secondary/20">
+      <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
+        <Activity className="w-3.5 h-3.5" />Mönster {dateLabel(patterns.from, "d/M")}–{dateLabel(patterns.to, "d/M")} ({patterns.days} dygn)
+      </div>
+      {patterns.items?.length ? (
+        <ul className="space-y-1.5">
+          {patterns.items.map((p) => (
+            <li key={p.id} className="flex items-start gap-2 text-sm">
+              <AlertTriangle className={`w-4 h-4 shrink-0 mt-0.5 ${p.alert ? "text-red-400" : "text-amber-400"}`} />
+              <span>{p.text}</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-sm text-muted-foreground">Inga mönster ännu – det krävs minst 3 bedömbara observationer av samma slag.</p>
+      )}
+      <p className="text-[10px] text-muted-foreground mt-2 font-mono">
+        Underlag: {c.corrections ?? 0} korrektioner · {c.mealBoluses ?? 0} måltidsbolusar · {c.nights ?? 0} nätter ({c.calmNights ?? 0} ostörda) · {c.days ?? 0} dygn · {c.longHighs ?? 0} långa höga perioder
+      </p>
+      <p className="text-[11px] text-muted-foreground mt-1.5">{DISCLAIMER}</p>
+    </div>
+  );
+}
+
 export default function GlucoseFood({ days = [] }) {
   const sorted = useMemo(() => [...days].filter((d) => d?.date).sort((a, b) => (a.date < b.date ? 1 : -1)), [days]);
   const [selected, setSelected] = useState(null);
@@ -198,7 +304,9 @@ export default function GlucoseFood({ days = [] }) {
           <div className="p-2 rounded-xl bg-primary/20"><Droplet className="w-5 h-5 text-primary" /></div>
           <div>
             <h3 className="text-base font-semibold">Blodsocker &amp; mat</h3>
-            <p className="text-xs text-muted-foreground">Dexcom G7 via Share · dygnsstatistik, matfoton och kurvan efter maten</p>
+            <p className="text-xs text-muted-foreground">
+              {SOURCE_LABEL[sorted.find((d) => d.source)?.source] || "Dexcom G7 via Share"} · dygnsstatistik, matfoton, insulin från pumpen och kurvan efter maten
+            </p>
           </div>
         </div>
       </div>
@@ -209,7 +317,7 @@ export default function GlucoseFood({ days = [] }) {
           <span>
             Beslutsstöd, inte journalhandling. Kolhydraterna är AI-uppskattningar från foto och kurvflaggorna beskriver
             blodsockrets <em>form</em> efter måltiden – de är underlag för samtal med diabetesteamet, aldrig en dosrekommendation.
-            Sidan innehåller inga insulindoser.
+            Insulindoserna visas som pumpen loggat dem (Glooko); sidan räknar aldrig fram doser, kvoter eller faktorer.
           </span>
         </div>
 
@@ -295,6 +403,10 @@ export default function GlucoseFood({ days = [] }) {
                     })}
                   </div>
                 )}
+
+                <Patterns patterns={current.patterns || sorted.find((d) => d.patterns)?.patterns} />
+
+                <InsulinDay day={current} />
 
                 <div>
                   <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">

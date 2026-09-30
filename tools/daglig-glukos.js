@@ -10,14 +10,20 @@
 //   npm run glukos -- --syntetisk          TYDLIGT MARKERAD testdata → tools/tests/out/, deployar aldrig
 //   npm run glukos -- --vanta-min 40       hur länge jobbet väntar på att Marc väljer bilder
 //
+// Glooko (npm run set-glooko): pumpens bolusar + basal lagras per dygn under
+// `insulin`, mönster över 14 dygn under `patterns`, och ett Telegram-larm går
+// max en gång per dygn när ett larmvärt mönster är nytt (data/glukos-larm.json).
+// Saknas Dexcom men Glooko ger CGM används Glooko som blodsockerkälla.
+//
 // Inga hemligheter loggas. Dexcom-uppgifter, Google-token och Gemini-nyckel
 // ligger i %APPDATA%\marcs-halsoai\ (se tools/glukos/config.mjs).
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import crypto from "node:crypto";
-import { PROJECT_ROOT, DEXCOM_FILE, readJsonSafe, makeLogger } from "./glukos/config.mjs";
+import { PROJECT_ROOT, DEXCOM_FILE, GLOOKO_FILE, readJsonSafe, makeLogger } from "./glukos/config.mjs";
 import { fetchDexcomReadings } from "./glukos/dexcom.mjs";
+import { fetchGlooko } from "./glukos/glooko.mjs";
 import { loadGoogleConfig, getAccessToken, createSession, waitForPick, listMediaItems, downloadMedia, deleteSession } from "./glukos/photos.mjs";
 import { sendTelegram, escapeHtml } from "./glukos/telegram.mjs";
 import { analyzeFood } from "./glukos/matbild.mjs";
@@ -25,6 +31,9 @@ import { makeThumbnail } from "./glukos/thumb.mjs";
 import { bumpSeedVersion, build, deploy } from "./glukos/deploy.mjs";
 import { calcStats, countLowEpisodes, dayPartStats, trendVsPrevious, toSeries } from "../src/lib/glukos/stats.js";
 import { mealInsight } from "../src/lib/glukos/meals.js";
+import {
+  bolusKind, doseSummary, evaluateCorrection, evaluateMealBolus, evaluateNight, longHighEpisodes, findPatterns, alertMessage,
+} from "../src/lib/glukos/doses.js";
 
 const MIN = 60_000;
 const DAY = 24 * 60 * MIN;
@@ -51,7 +60,9 @@ const PATHS = {
   publicMat: path.join(OUT_ROOT, "public", "mat"),
   tmp: path.join(os.tmpdir(), "marcs-halsoai-glukos"),
   log: path.join(PROJECT_ROOT, "logs", "daglig-glukos.log"),
+  alertState: path.join(OUT_ROOT, "data", "glukos-larm.json"),
 };
+const PATTERN_DAYS = 14;
 const log = makeLogger(PATHS.log);
 
 // ------------------------------------------------------------------ datum
@@ -87,7 +98,7 @@ function loadDays() {
 function saveDays(days) {
   // Tomma dygn (ingen statistik, inga måltider) ska inte bli tomma kort på sajten.
   for (let i = days.length - 1; i >= 0; i--) {
-    if (!Number.isFinite(days[i].avg) && !(days[i].meals || []).length) days.splice(i, 1);
+    if (!Number.isFinite(days[i].avg) && !(days[i].meals || []).length && !(days[i].insulin?.boluses || []).length) days.splice(i, 1);
   }
   days.sort((a, b) => (a.date < b.date ? -1 : 1));
   fs.mkdirSync(path.dirname(PATHS.days), { recursive: true });
@@ -152,7 +163,7 @@ function syntheticMeals(date) {
 }
 
 // --------------------------------------------------------------- steg 1: CGM
-async function glucoseStep(days, date) {
+async function glucoseStep(days, date, glooko = null) {
   const entry = dayEntry(days, date);
   let series;
   if (SYNTETISK) {
@@ -162,8 +173,19 @@ async function glucoseStep(days, date) {
     log(`SYNTETISK dag ${date}: ${series.length} genererade värden.`);
   } else if (!BARA_BILDER) {
     const creds = readJsonSafe(DEXCOM_FILE);
-    if (!creds || !creds.username) {
-      log("Dexcom-uppgifter saknas (npm run set-dexcom) – använder bara arkivet.");
+    if ((!creds || !creds.username) && glooko?.readings?.length) {
+      // En inloggning räcker: Glooko får vara blodsockerkällan när Dexcom saknas.
+      const perDay = new Map();
+      for (const p of glooko.readings) {
+        const d = localDate(p.t);
+        if (!perDay.has(d)) perDay.set(d, []);
+        perDay.get(d).push(p);
+      }
+      for (const [d, s] of perDay) saveArchive(d, s);
+      entry.source = "glooko";
+      log(`Dexcom saknas – använder Glooko-CGM (${glooko.readings.length} värden).`);
+    } else if (!creds || !creds.username) {
+      log("Dexcom-uppgifter saknas (npm run set-dexcom) och Glooko gav ingen CGM – använder bara arkivet.");
     } else {
       const { readings, region } = await fetchDexcomReadings(creds, { minutes: 1440, maxCount: 288 });
       const all = toSeries(readings);
@@ -299,15 +321,181 @@ function trendStep(days, date) {
   entry.trend = trendVsPrevious(entry, prev);
 }
 
+// ------------------------------------------------------ steg 0: Glooko
+// Hämtar gårdagen + dagen (så sena kvällsdoser får hela uppföljningen).
+async function glookoFetch(date) {
+  const creds = readJsonSafe(GLOOKO_FILE);
+  if (!creds || !creds.email || !creds.password) {
+    log("Glooko ej kopplat (npm run set-glooko) – inga insulindoser.");
+    return null;
+  }
+  const startMs = dayStart(addDays(date, -1));
+  const endMs = Math.min(Date.now(), dayStart(date) + DAY);
+  const r = await fetchGlooko(creds, { startMs, endMs });
+  log(`Glooko (${r.server}): ${r.readings.length} CGM, ${r.boluses.length} bolusar, ${r.basals.length} basalposter.`);
+  log(`  endpoints: ${r.diag.join(" · ")}`);
+  return r;
+}
+
+function syntheticBoluses(date) {
+  const t0 = dayStart(date);
+  const at = (min) => new Date(t0 + min * MIN).toISOString();
+  return [
+    { time: at(8 * 60), units: 2.5, carbs: 38 },
+    { time: at(12.5 * 60), units: 5.2, carbs: 78 },
+    { time: at(15.75 * 60), units: 1.5, carbs: null },   // korrektion efter hög lunch
+    { time: at(18.5 * 60), units: 4.3, carbs: 65 },
+  ];
+}
+
+// ------------------------------------------------- steg 1b: insulindoser
+function insulinStep(days, date, glooko) {
+  let perDay = new Map();
+  if (SYNTETISK) {
+    perDay.set(date, { boluses: syntheticBoluses(date), basals: [{ time: new Date(dayStart(date)).toISOString(), rate: 0.9 }] });
+  } else if (glooko) {
+    for (const b of glooko.boluses) {
+      const d = localDate(Date.parse(b.time));
+      if (!perDay.has(d)) perDay.set(d, { boluses: [], basals: [] });
+      perDay.get(d).boluses.push(b);
+    }
+    for (const b of glooko.basals) {
+      const d = localDate(Date.parse(b.time));
+      if (!perDay.has(d)) perDay.set(d, { boluses: [], basals: [] });
+      perDay.get(d).basals.push(b);
+    }
+    // Dygn i hämtfönstret utan doser: markera att data finns (0 bolusar är också data).
+    for (const d of [addDays(date, -1), date]) if (!perDay.has(d)) perDay.set(d, { boluses: [], basals: [] });
+  } else {
+    return;
+  }
+  for (const [d, { boluses, basals }] of perDay) {
+    const entry = dayEntry(days, d);
+    const prev = entry.insulin || {};
+    const byT = new Map((prev.boluses || []).map((b) => [b.time, b]));
+    for (const b of boluses) byT.set(b.time, { time: b.time, units: b.units, carbs: b.carbs ?? null, kind: bolusKind(b) });
+    const merged = [...byT.values()].sort((a, b) => Date.parse(a.time) - Date.parse(b.time));
+    const basT = new Map((prev.basals || []).map((b) => [b.time, b]));
+    for (const b of basals) basT.set(b.time, { time: b.time, rate: b.rate });
+    const mergedBasals = [...basT.values()].sort((a, b) => Date.parse(a.time) - Date.parse(b.time));
+    entry.insulin = {
+      ...prev,
+      source: SYNTETISK ? "syntetisk" : "glooko",
+      updated: new Date().toISOString(),
+      boluses: merged,
+      basals: mergedBasals,
+      summary: doseSummary(merged, mergedBasals),
+    };
+    log(`${d}: ${merged.length} bolusar (${entry.insulin.summary.n_meal} måltid, ${entry.insulin.summary.n_correction} korrektion).`);
+  }
+}
+
+// ---------------------------------------------- steg 5: dosmönster (14 d)
+function doseAnalysisStep(days, date) {
+  const windowDates = [];
+  for (let i = PATTERN_DAYS - 1; i >= 0; i--) windowDates.push(addDays(date, -i));
+  const series = [addDays(date, -PATTERN_DAYS), ...windowDates, addDays(date, 1)]
+    .flatMap((d) => loadArchive(d))
+    .sort((a, b) => a.t - b.t);
+  const byDate = new Map(days.map((d) => [d.date, d]));
+  const allBoluses = [addDays(date, -PATTERN_DAYS), ...windowDates, addDays(date, 1)]
+    .flatMap((d) => byDate.get(d)?.insulin?.boluses || []);
+  const allMeals = [addDays(date, -PATTERN_DAYS), ...windowDates, addDays(date, 1)]
+    .flatMap((d) => byDate.get(d)?.meals || []);
+  const ctx = { boluses: allBoluses, meals: allMeals };
+
+  const corrections = [], mealBoluses = [], nights = [], dayStats = [], longHighs = [];
+  for (const d of windowDates) {
+    const entry = byDate.get(d);
+    const hasDoses = !!entry?.insulin;
+    if (hasDoses) {
+      const bs = entry.insulin.boluses || [];
+      entry.insulin.corrections = bs.filter((b) => b.kind === "correction").map((b) => evaluateCorrection(b, series, ctx));
+      entry.insulin.mealBoluses = bs.filter((b) => b.kind === "meal").map((b) => evaluateMealBolus(b, series, ctx));
+      corrections.push(...entry.insulin.corrections);
+      mealBoluses.push(...entry.insulin.mealBoluses);
+      const start = dayStart(d), end = start + DAY;
+      longHighs.push(...longHighEpisodes(series, allBoluses).filter((e) => e.start >= start && e.start < end));
+    }
+    const prevHasDoses = !!byDate.get(addDays(d, -1))?.insulin;
+    const night = evaluateNight(
+      series,
+      new Date(`${addDays(d, -1)}T23:00:00`).getTime(),
+      new Date(`${d}T06:00:00`).getTime(),
+      { ...ctx, hasDoseData: hasDoses && prevHasDoses, date: d },
+    );
+    if (night) {
+      nights.push(night);
+      if (entry) entry.night = night;
+    }
+    if (entry && entry.tir) dayStats.push({ date: d, veryHighPct: entry.tir.veryHigh });
+  }
+
+  const items = findPatterns({ corrections, mealBoluses, nights, dayStats, longHighs });
+  const entry = byDate.get(date);
+  if (!entry) return [];
+  entry.patterns = {
+    updated: new Date().toISOString(),
+    from: windowDates[0], to: date, days: PATTERN_DAYS,
+    counts: {
+      corrections: corrections.filter((c) => !c.excluded && c.verdict !== "no_data").length,
+      mealBoluses: mealBoluses.filter((m) => !m.excluded && m.verdict !== "no_data").length,
+      nights: nights.length,
+      calmNights: nights.filter((n) => !n.excluded).length,
+      days: dayStats.length,
+      longHighs: longHighs.length,
+    },
+    items,
+  };
+  log(`Mönster ${windowDates[0]}–${date}: ${items.length} (${items.filter((p) => p.alert).length} larmvärda).`);
+  return items;
+}
+
+// ------------------------------------------------- steg 6: Telegram-larm
+// Max ett larm per dygn, och bara när ett larmvärt mönster är nytt, har fler
+// träffar än förra gången eller inte larmats på 7 dygn.
+async function alertStep(date, patterns) {
+  const alertable = (patterns || []).filter((p) => p.alert);
+  if (!alertable.length) return;
+  const state = readJsonSafe(PATHS.alertState, { lastDate: null, sent: {} }) || { lastDate: null, sent: {} };
+  if (state.lastDate === date) { log("Larm redan skickat i dag – hoppar över."); return; }
+  const fresh = alertable.filter((p) => {
+    const s = state.sent?.[p.id];
+    return !s || p.hits > s.hits || dayStart(date) - dayStart(s.date) >= 7 * DAY;
+  });
+  if (!fresh.length) { log("Larmvärda mönster oförändrade sedan senaste larmet – inget nytt skickas."); return; }
+  const msg = alertMessage(alertable, { date });
+  if (SYNTETISK) { log(`[SYNTETISK – skickas inte] ${msg.replace(/<[^>]+>/g, "").replace(/\n+/g, " | ")}`); return; }
+  if (!(await sendTelegram(msg))) { log("Mönsterlarmet kunde inte skickas (Telegram)."); return; }
+  const sent = { ...(state.sent || {}) };
+  for (const p of alertable) sent[p.id] = { hits: p.hits, n: p.n, date };
+  fs.mkdirSync(path.dirname(PATHS.alertState), { recursive: true });
+  fs.writeFileSync(PATHS.alertState, JSON.stringify({ lastDate: date, sent }, null, 1), "utf8");
+  log(`Mönsterlarm skickat (${alertable.map((p) => p.id).join(", ")}).`);
+}
+
 // -------------------------------------------------------------------- main
 async function main() {
   log(`=== daglig-glukos ${DATE}${SYNTETISK ? " [SYNTETISK]" : ""}${BARA_BILDER ? " [bara bilder]" : ""} ===`);
   const days = loadDays();
 
+  let glooko = null;
+  if (!SYNTETISK && !BARA_BILDER) {
+    try {
+      glooko = await glookoFetch(DATE);
+    } catch (e) {
+      log(`Glooko-steget misslyckades: ${e.message}`);
+    }
+  }
   try {
-    await glucoseStep(days, DATE);
+    await glucoseStep(days, DATE, glooko);
   } catch (e) {
     log(`Dexcom-steget misslyckades: ${e.message}`);
+  }
+  try {
+    insulinStep(days, DATE, glooko);
+  } catch (e) {
+    log(`Insulinsteget misslyckades: ${e.message}`);
   }
   saveDays(days);
 
@@ -322,7 +510,18 @@ async function main() {
 
   insightsStep(days, [addDays(DATE, -1), DATE]);
   trendStep(days, DATE);
+  let patterns = [];
+  try {
+    patterns = doseAnalysisStep(days, DATE);
+  } catch (e) {
+    log(`Mönsteranalysen misslyckades: ${e.message}`);
+  }
   saveDays(days);
+  try {
+    await alertStep(DATE, patterns);
+  } catch (e) {
+    log(`Mönsterlarmet misslyckades: ${e.message}`);
+  }
   log(`Skrivet: ${path.relative(PROJECT_ROOT, PATHS.days)} (${days.length} dygn).`);
 
   if (UTAN_DEPLOY) {
