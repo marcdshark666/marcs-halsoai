@@ -39,6 +39,13 @@ node_modules/
 secrets/
 # Glukosjobbet: testutdata (syntetisk) – aldrig i sajten
 tools/tests/out/
+# Glukosjobbet: råvärden per dygn och larmstatus – bara lokalt, aldrig i repot
+/data/
+# Hemligheter bor i %APPDATA%\marcs-halsoai\ – aldrig här
+*.credentials.json
+credentials*.json
+auth.json
+token*.json
 Thumbs.db
 __pycache__/
 *.py[cod]

@@ -115,6 +115,14 @@ function MealCurve({ insight }) {
   );
 }
 
+// Miniatyrerna sparas som "/mat/ÅÅÅÅ-MM-DD/id.jpg"; under GitHub Pages ligger
+// sajten på /marcs-halsoai/ så basen måste läggas på (Vite: BASE_URL).
+function withBase(p) {
+  if (!p || /^(https?:)?\/\//.test(p)) return p;
+  const base = import.meta.env.BASE_URL || "/";
+  return base.replace(/\/$/, "") + (p.startsWith("/") ? p : `/${p}`);
+}
+
 function MealRow({ meal }) {
   const t = new Date(meal.time);
   const ins = meal.insight;
@@ -123,7 +131,7 @@ function MealRow({ meal }) {
     <div className="flex flex-col sm:flex-row gap-4 p-3.5 rounded-xl border border-border/60 bg-secondary/30">
       <div className="w-full sm:w-36 shrink-0">
         {meal.photo ? (
-          <img src={meal.photo} alt="" loading="lazy" className="w-full sm:w-36 h-28 object-cover rounded-lg border border-border/60" />
+          <img src={withBase(meal.photo)} alt="" loading="lazy" className="w-full sm:w-36 h-28 object-cover rounded-lg border border-border/60" />
         ) : (
           <div className="w-full sm:w-36 h-28 rounded-lg border border-dashed border-border flex items-center justify-center text-muted-foreground">
             <Utensils className="w-6 h-6 opacity-50" />
