@@ -2,8 +2,9 @@ import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { Calendar, FileText, Heart, Sparkles, FlaskConical,
-  LayoutDashboard, Bell, Pill, Droplet,
+  LayoutDashboard, Bell, Pill, Droplet, ListChecks,
 } from "lucide-react";
+import MarcTodo from "@/components/health/MarcTodo";
 import GlucoseFood from "@/components/health/GlucoseFood";
 import SearchBar from "@/components/health/SearchBar";
 import LabValueCard from "@/components/health/LabValueCard";
@@ -56,7 +57,8 @@ const NAV_ITEMS = [
   { icon: LayoutDashboard, label: "Översikt", target: "top" },
   { icon: Droplet, label: "Blodsocker", target: "blodsocker" },
   { icon: FlaskConical, label: "Prover", target: "prover" },
-  { icon: Calendar, label: "Att göra", target: "kalender" },
+  { icon: ListChecks, label: "Att göra", target: "att-gora" },
+  { icon: Calendar, label: "Kalender", target: "kalender" },
   { icon: Pill, label: "Behandling", target: "plan" },
   { icon: Sparkles, label: "Studier", target: "evidens" },
   { icon: FileText, label: "Journal", target: "journal" },
@@ -279,6 +281,11 @@ export default function Dashboard() {
         {/* Search bar */}
         <div className="mb-6">
           <SearchBar labResults={labResults} journalEntries={journalEntries} />
+        </div>
+
+        {/* Att göra för Marc – inkoppling + vård, kryss sparas lokalt i webbläsaren */}
+        <div id="att-gora" className="mb-6 scroll-mt-20">
+          <MarcTodo />
         </div>
 
         {/* Overdue alerts */}

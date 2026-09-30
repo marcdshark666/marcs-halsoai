@@ -6,11 +6,15 @@
 import { DEXCOM_FILE, readJsonSafe, writeJsonPrivate, ask, askHidden } from "./glukos/config.mjs";
 import { fetchDexcomReadings } from "./glukos/dexcom.mjs";
 
+// Marcs användarnamn (inte hemligt; bara förifyllt i den lokala prompten, aldrig på sidan).
+const DEFAULT_USERNAME = "marcjonsson_d2";
+
 async function main() {
   console.log("Dexcom Share – uppgifter för det nattliga glukosjobbet");
   console.log("Samma användarnamn/lösenord som i Dexcom-appen (Share måste vara påslaget, minst en följare).\n");
   const existing = readJsonSafe(DEXCOM_FILE, {});
-  const username = await ask(`Användarnamn${existing.username ? ` [${existing.username}]` : ""}: `, { fallback: existing.username || "" });
+  const defaultUser = existing.username || DEFAULT_USERNAME;
+  const username = await ask(`Användarnamn [${defaultUser}] (Enter = behåll): `, { fallback: defaultUser });
   if (!username) { console.error("Inget användarnamn."); process.exit(1); }
   if (!process.stdin.isTTY) console.log("(Obs: ingen riktig konsol – lösenordet kan synas när du skriver.)");
   const password = await askHidden("Lösenord (visas inte): ");

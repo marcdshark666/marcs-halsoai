@@ -6,11 +6,15 @@
 import { GLOOKO_FILE, DEXCOM_FILE, readJsonSafe, writeJsonPrivate, ask, askHidden } from "./glukos/config.mjs";
 import { fetchGlooko } from "./glukos/glooko.mjs";
 
+// Marcs användarnamn (inte hemligt; bara förifyllt i den lokala prompten, aldrig på sidan).
+const DEFAULT_USERNAME = "marcjonsson_d2";
+
 async function main() {
   console.log("Glooko – uppgifter för det nattliga glukosjobbet (insulindoser från pumpen)");
   console.log("Samma e-post/lösenord som du loggar in på Glooko med.\n");
   const existing = readJsonSafe(GLOOKO_FILE, {});
-  const email = await ask(`E-post${existing.email ? ` [${existing.email}]` : ""}: `, { fallback: existing.email || "" });
+  const defaultUser = existing.email || DEFAULT_USERNAME;
+  const email = await ask(`Användarnamn/e-post [${defaultUser}] (Enter = behåll): `, { fallback: defaultUser });
   if (!email) { console.error("Ingen e-post."); process.exit(1); }
   if (!process.stdin.isTTY) console.log("(Obs: ingen riktig konsol – lösenordet kan synas när du skriver.)");
   const password = await askHidden("Lösenord (visas inte): ");
